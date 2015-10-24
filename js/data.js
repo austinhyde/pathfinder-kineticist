@@ -63,12 +63,25 @@ define([], function() {
     return $contents.filter('b').map(function() {
       return {
         name: this.innerText,
-        value: parseAttrValue(this.nextSibling.nodeValue)
+        value: parseAttrValue(this.nextSibling)
       };
     }).get();
   }
 
-  function parseAttrValue(value) {
+  function parseAttrValue(node) {
+    var value = '';
+    while (node && node.nodeName != 'B') {
+      switch (node.nodeType) {
+        case 1:
+          value += node.outerHTML;
+          break;
+        case 3:
+          value += node.nodeValue;
+          break;
+      }
+      node = node.nextSibling;
+    }
+
     value = value.replace(/(^:? +)|(;? +$)/g, '');
 
     var v;

@@ -20,6 +20,7 @@ require(['data'], function(loadData) {
   Page.prototype.load = function() {
     var self = this;
     getData().then(function(sects){
+      page.data = sects;
       self.sections(_.map(sects, function(d) {
         return new Section(d);
       }));

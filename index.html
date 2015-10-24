@@ -70,7 +70,7 @@
           <tr>
             <th data-bind="text: title"></th>
             <!-- ko foreach: _.values(attrs) -->
-            <td data-bind="text: $data"></td>
+            <td data-bind="html: $data"></td>
             <!-- /ko -->
           </tr>
           <tr><td data-bind="html: desc, attr: { colspan: _.keys(attrs).length + 1 }"></td></tr>
