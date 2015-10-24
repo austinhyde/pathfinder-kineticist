@@ -60,7 +60,7 @@ require(['data'], function(loadData) {
       if (dir == 'none') {
         return items;
       }
-      return _.sortByOrder(items, [key == 'name' ? 'Name' : 'attrs.'+key], [dir]);
+      return _.sortByOrder(items, [key == 'name' ? 'title' : 'attrs.'+key], [dir]);
     }, this);
   }
 
