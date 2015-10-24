@@ -93,6 +93,10 @@ define([], function() {
       return 0;
     }
 
+    if (value === 'universal') {
+      value = 'aether air earth fire water';
+    }
+
     return value;
   }
 

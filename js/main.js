@@ -108,11 +108,8 @@ require(['data'], function(loadData) {
   }
 
   Section.prototype.elementTags = function(elements) {
-    elements = elements.toLowerCase();
-    if (elements == 'universal') {
-      elements = 'aether air earth fire water';
-    }
     return elements
+      .toLowerCase()
       .split(/,? +(?:(?:and|or) +)?/)
       .map(function(e) { return '<span class="label el ' + e + '">' + e + '</span>'; })
       .join(' ');
