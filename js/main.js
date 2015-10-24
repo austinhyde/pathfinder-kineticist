@@ -80,6 +80,12 @@ require(['data'], function(loadData) {
     if (_.isUndefined(value)) {
       return false;
     }
+
+    var neg = filter[0] == '!';
+    if (neg) {
+      filter = filter.substr(1);
+    }
+
     if (value == '-' || value == '—' || value == '–' || value == '—') {
       value = 0;
     }
@@ -90,9 +96,13 @@ require(['data'], function(loadData) {
         filter = filter.substr(1);
       }
       filter = parseInt(filter);
-      return !_.isNaN(filter) && ops[op](value, filter);
+      return (!_.isNaN(filter) && ops[op](value, filter)) != neg;
     }
-    return value.toLowerCase().indexOf(filter) != -1;
+    if (filter == '*') {
+      return !!value.length;
+    }
+
+    return (value.toLowerCase().indexOf(filter) != -1) != neg;
   }
 
 
