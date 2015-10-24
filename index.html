@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pathfinder Kineticist</title>
+  <base target="_blank">
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/font-awesome.min.css"/>
+  <style>
+  input.form-control.filter {
+    height: 20px;
+    width: auto;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: normal;
+  }
+  th .sortable {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    border-bottom: 1px dotted #CCC;
+    cursor: pointer;
+  }
+  .container-fluid {
+    margin-top: 10px;
+  }
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
+  <ul class="nav nav-tabs nav-justified" data-bind="foreach: sections">
+    <li data-bind="css: { active: $index() == 0 }">
+      <a href="#" data-bind="
+        text: items.length == filteredItems().length? title : title + ' (' + filteredItems().length + ')',
+        attr: { href: '#' + _.kebabCase(title) }" role="tab" data-toggle="tab"></a>
+    </li>
+  </ul>
+
+  <div class="tab-content" data-bind="foreach: sections">
+    <div role="tabpanel" class="tab-pane" data-bind="attr: { id: _.kebabCase(title) }, css: { active: $index() == 0 }">
+      <br>
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>
+              <span data-bind="click: clickSort.bind(this, 'name')" class="sortable">Name</span>
+              <!-- ko if: sortKey() == 'name' && sortDir() != 'none' -->
+              <i class="fa" data-bind="css: 'fa-sort-' + sortDir()"></i>
+              <!-- /ko -->
+              <input type="text" class="form-control filter" data-bind="textInput: nameFilter">
+            </th>
+            <!-- ko foreach: headers -->
+            <th>
+              <span data-bind="text: $data, click: $parent.clickSort.bind($parent)" class="sortable"></span>
+              <!-- ko if: $parent.sortKey() == $data && $parent.sortDir() != 'none' -->
+              <i class="fa" data-bind="css: 'fa-sort-' + $parent.sortDir()"></i>
+              <!-- /ko -->
+              <input type="text" class="form-control filter" data-bind="textInput: $parent.attrFilters[$data]">
+            </th>
+            <!-- /ko -->
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: sortedFilteredItems">
+          <tr>
+            <th data-bind="text: title"></th>
+            <!-- ko foreach: _.values(attrs) -->
+            <td data-bind="text: $data"></td>
+            <!-- /ko -->
+          </tr>
+          <tr><td data-bind="html: desc, attr: { colspan: _.keys(attrs).length + 1 }"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  <script src="js/lib/jquery.js"></script>
+  <script src="js/lib/knockout.js"></script>
+  <script src="js/lib/lodash.js"></script>
+  <script src="js/lib/bootstrap.js"></script>
+  <script>var require = {baseUrl: 'js'};</script>
+  <script data-main="main" src="js/lib/require.js"></script>
+</body>
+</html>
