@@ -48,7 +48,7 @@
       <table class="table table-striped table-condensed">
         <thead>
           <tr>
-            <th>
+            <th data-bind="attr: {width: (100 / (headers.length+1)) + '%'}">
               <span data-bind="click: clickSort.bind(this, 'name')" class="sortable">Name</span>
               <!-- ko if: sortKey() == 'name' && sortDir() != 'none' -->
               <i class="fa" data-bind="css: 'fa-sort-' + sortDir()"></i>
@@ -56,7 +56,7 @@
               <input type="text" class="form-control filter" data-bind="textInput: nameFilter">
             </th>
             <!-- ko foreach: headers -->
-            <th>
+            <th data-bind="attr: {width: (100 / ($parent.headers.length+1)) + '%'}">
               <span data-bind="text: $data, click: $parent.clickSort.bind($parent)" class="sortable"></span>
               <!-- ko if: $parent.sortKey() == $data && $parent.sortDir() != 'none' -->
               <i class="fa" data-bind="css: 'fa-sort-' + $parent.sortDir()"></i>
