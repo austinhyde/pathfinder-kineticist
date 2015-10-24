@@ -86,6 +86,8 @@ require(['data'], function(loadData) {
       filter = filter.substr(1);
     }
 
+    value = $('<span>'+value+'</span>').text();
+
     if (value == '-' || value == '—' || value == '–' || value == '—') {
       value = 0;
     }
@@ -105,6 +107,16 @@ require(['data'], function(loadData) {
     return (value.toLowerCase().indexOf(filter) != -1) != neg;
   }
 
+  Section.prototype.elementTags = function(elements) {
+    elements = elements.toLowerCase();
+    if (elements == 'universal') {
+      elements = 'aether air earth fire water';
+    }
+    return elements
+      .split(/,? +(?:(?:and|or) +)?/)
+      .map(function(e) { return '<span class="label el ' + e + '">' + e + '</span>'; })
+      .join(' ');
+  }
 
   var page = window.page = new Page();
   ko.applyBindings(page);

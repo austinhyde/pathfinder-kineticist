@@ -28,6 +28,22 @@
   .container-fluid {
     margin-top: 10px;
   }
+
+  .el.aether {
+    background-color:#666666;
+  }
+  .el.water {
+    background-color:#65BEDF;
+  }
+  .el.air {
+    background-color:#4E5DAB;
+  }
+  .el.fire {
+    background-color:#CB3F16;
+  }
+  .el.earth {
+    background-color:#925510;
+  }
   </style>
 </head>
 <body>
@@ -69,8 +85,8 @@
         <tbody data-bind="foreach: sortedFilteredItems">
           <tr>
             <th data-bind="text: title"></th>
-            <!-- ko foreach: _.values(attrs) -->
-            <td data-bind="html: $data"></td>
+            <!-- ko foreach: _.pairs(attrs) -->
+            <td data-bind="html: $data[0] == 'Element(s)'?$parents[1].elementTags($data[1]):$data[1]"></td>
             <!-- /ko -->
           </tr>
           <tr><td data-bind="html: desc, attr: { colspan: _.keys(attrs).length + 1 }"></td></tr>
